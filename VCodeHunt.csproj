@@ -85,9 +85,6 @@
     <Compile Include="SearchBinary.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigSearchParams.cs" />
-    <Compile Include="CustomDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="SearchFile.cs" />
     <Compile Include="FormViewer.cs">
       <SubType>Form</SubType>
