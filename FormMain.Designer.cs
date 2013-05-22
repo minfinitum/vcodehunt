@@ -435,7 +435,7 @@
             // cbSearchUseRegex
             // 
             this.cbSearchUseRegex.AutoSize = true;
-            this.cbSearchUseRegex.Location = new System.Drawing.Point(12, 223);
+            this.cbSearchUseRegex.Location = new System.Drawing.Point(12, 226);
             this.cbSearchUseRegex.Name = "cbSearchUseRegex";
             this.cbSearchUseRegex.Size = new System.Drawing.Size(97, 17);
             this.cbSearchUseRegex.TabIndex = 13;
@@ -445,7 +445,7 @@
             // cbSearchNegate
             // 
             this.cbSearchNegate.AutoSize = true;
-            this.cbSearchNegate.Location = new System.Drawing.Point(12, 246);
+            this.cbSearchNegate.Location = new System.Drawing.Point(12, 249);
             this.cbSearchNegate.Name = "cbSearchNegate";
             this.cbSearchNegate.Size = new System.Drawing.Size(98, 17);
             this.cbSearchNegate.TabIndex = 14;
