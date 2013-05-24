@@ -6,7 +6,7 @@ Place it in your favourite tools folder. A configuration file is dropped in the 
 
 Setup:
 Run vcodehunt.exe
-Check 'Options' and setup you're prefered editor. If you browse and select; notepad++, ultraedit, sublime_text and it will pick automatic configuration defaults.
+Open 'Options' and add your prefered editor. If you browse and select; notepad++, ultraedit, sublime_text and it will pick automatic configuration defaults.
 Enable 'Show Context' set a resonable value (i.e. 5).
 Enable Search Subfolders
 
