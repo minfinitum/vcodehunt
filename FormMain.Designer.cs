@@ -141,7 +141,7 @@
             // 
             this.viewMatches.BackColor = System.Drawing.Color.White;
             this.viewMatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewMatches.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewMatches.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.viewMatches.Location = new System.Drawing.Point(0, 0);
             this.viewMatches.Name = "viewMatches";
             this.viewMatches.ReadOnly = true;
@@ -273,12 +273,12 @@
             this.cbSearchHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSearchHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSearchHistory.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbSearchHistory.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.cbSearchHistory.FormattingEnabled = true;
             this.cbSearchHistory.Location = new System.Drawing.Point(75, 515);
             this.cbSearchHistory.MaxDropDownItems = 32;
             this.cbSearchHistory.Name = "cbSearchHistory";
-            this.cbSearchHistory.Size = new System.Drawing.Size(927, 21);
+            this.cbSearchHistory.Size = new System.Drawing.Size(927, 22);
             this.cbSearchHistory.TabIndex = 24;
             this.cbSearchHistory.SelectedIndexChanged += new System.EventHandler(this.cbSearchHistory_SelectedIndexChanged);
             // 
@@ -297,7 +297,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPath.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.cbPath.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbPath.FormattingEnabled = true;
             this.cbPath.Location = new System.Drawing.Point(81, 24);
             this.cbPath.Name = "cbPath";
@@ -337,7 +337,7 @@
             // 
             this.cbFilters.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cbFilters.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbFilters.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbFilters.FormattingEnabled = true;
             this.cbFilters.Location = new System.Drawing.Point(12, 67);
             this.cbFilters.Name = "cbFilters";
@@ -357,7 +357,7 @@
             // 
             this.cbKeywords.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cbKeywords.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbKeywords.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbKeywords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbKeywords.FormattingEnabled = true;
             this.cbKeywords.Location = new System.Drawing.Point(12, 107);
             this.cbKeywords.Name = "cbKeywords";
