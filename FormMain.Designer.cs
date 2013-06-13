@@ -72,6 +72,7 @@
             this.nudContextLines = new System.Windows.Forms.NumericUpDown();
             this.lblFileContentType = new System.Windows.Forms.Label();
             this.cbFileContentType = new System.Windows.Forms.ComboBox();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -141,7 +142,7 @@
             // 
             this.viewMatches.BackColor = System.Drawing.Color.White;
             this.viewMatches.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.viewMatches.Font = new System.Drawing.Font("Courier New", 8.25F);
+            this.viewMatches.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.viewMatches.Location = new System.Drawing.Point(0, 0);
             this.viewMatches.Name = "viewMatches";
             this.viewMatches.ReadOnly = true;
@@ -221,21 +222,22 @@
             // clearHistoryToolStripMenuItem
             // 
             this.clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
-            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clearHistoryToolStripMenuItem.Text = "Clear History";
             this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editorsToolStripMenuItem});
+            this.editorsToolStripMenuItem,
+            this.fontToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -243,7 +245,7 @@
             // editorsToolStripMenuItem
             // 
             this.editorsToolStripMenuItem.Name = "editorsToolStripMenuItem";
-            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editorsToolStripMenuItem.Text = "Editors";
             this.editorsToolStripMenuItem.Click += new System.EventHandler(this.editorsToolStripMenuItem_Click);
             // 
@@ -273,12 +275,12 @@
             this.cbSearchHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSearchHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSearchHistory.Font = new System.Drawing.Font("Courier New", 8.25F);
+            this.cbSearchHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbSearchHistory.FormattingEnabled = true;
             this.cbSearchHistory.Location = new System.Drawing.Point(75, 515);
             this.cbSearchHistory.MaxDropDownItems = 32;
             this.cbSearchHistory.Name = "cbSearchHistory";
-            this.cbSearchHistory.Size = new System.Drawing.Size(927, 22);
+            this.cbSearchHistory.Size = new System.Drawing.Size(927, 21);
             this.cbSearchHistory.TabIndex = 24;
             this.cbSearchHistory.SelectedIndexChanged += new System.EventHandler(this.cbSearchHistory_SelectedIndexChanged);
             // 
@@ -509,6 +511,13 @@
             this.cbFileContentType.Size = new System.Drawing.Size(136, 21);
             this.cbFileContentType.TabIndex = 10;
             // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,6 +625,7 @@
         private System.Windows.Forms.NumericUpDown nudContextLines;
         private System.Windows.Forms.Label lblFileContentType;
         private System.Windows.Forms.ComboBox cbFileContentType;
+        private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
     }
 }
 

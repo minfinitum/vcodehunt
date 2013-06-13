@@ -22,7 +22,8 @@
             viewViewers.AllowUserToResizeRows = false;
             viewViewers.EditMode = DataGridViewEditMode.EditProgrammatically;
             viewViewers.AllowUserToResizeColumns = true;
-             
+            viewViewers.MultiSelect = false;
+
             m_config = config;
             if (m_config.Viewers.Count <= 0)
             {
@@ -59,6 +60,8 @@
             }
 
             viewViewers.DataSource = m_viewerBinding;
+
+            SetPositionControls();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -68,35 +71,45 @@
             {
                 m_viewerBinding.Add(fv.Viewer);
             }
+
+            SetPositionControls();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in viewViewers.SelectedRows)
+            int count = viewViewers.SelectedRows.Count;
+            if (1 != count)
+                return;
+
+            DataGridViewRow row = viewViewers.SelectedRows[0];
+            FormViewer fv = new FormViewer((Viewer) row.DataBoundItem);
+            if (fv.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                FormViewer fv = new FormViewer((Viewer) row.DataBoundItem);
-                if (fv.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
+                if(idx != -1)
                 {
-                    int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
-                    if(idx != -1)
-                    {
-                        m_viewerBinding.RemoveAt(idx);
-                        m_viewerBinding.Insert(idx, fv.Viewer);
-                    }
+                    m_viewerBinding.RemoveAt(idx);
+                    m_viewerBinding.Insert(idx, fv.Viewer);
                 }
             }
+
+            SetPositionControls();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in viewViewers.SelectedRows)
+            int count = viewViewers.SelectedRows.Count;
+            if (1 != count)
+                return;
+
+            DataGridViewRow row = viewViewers.SelectedRows[0];
+            int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
+            if (idx != -1)
             {
-                int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
-                if (idx != -1)
-                {
-                    m_viewerBinding.RemoveAt(idx);
-                }
+                m_viewerBinding.RemoveAt(idx);
             }
+
+            SetPositionControls();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -104,6 +117,58 @@
             m_config.Viewers.Clear();
             m_config.Viewers.AddRange(m_viewerBinding.ToList());
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        private void FormViewers_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch ((Keys)e.KeyChar)
+            {
+                case Keys.Escape:
+                    DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                    e.Handled = true;
+                    this.Close();
+                    break;
+            }
+        }
+
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            int count = m_viewerBinding.Count;
+            if (1 >= count)
+                return;
+
+            DataGridViewRow row = viewViewers.SelectedRows[0];
+            int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
+            if (idx == 0)
+                return;
+
+            Viewer viewer = (Viewer)row.DataBoundItem;
+            m_viewerBinding.RemoveAt(idx);
+            m_viewerBinding.Insert(idx - 1, viewer);
+            viewViewers.Rows[idx - 1].Selected = true;
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            int count = m_viewerBinding.Count;
+            if (1 >= count)
+                return;
+
+            DataGridViewRow row = viewViewers.SelectedRows[0];
+            int idx = m_viewerBinding.IndexOf((Viewer)row.DataBoundItem);
+            if (idx == m_viewerBinding.Count() - 1)
+                return;
+
+            Viewer viewer = (Viewer)row.DataBoundItem;
+            m_viewerBinding.RemoveAt(idx);
+            m_viewerBinding.Insert(idx + 1, viewer);
+            viewViewers.Rows[idx + 1].Selected = true;
+        }
+
+        void SetPositionControls()
+        {
+            btnUp.Enabled = (m_viewerBinding.Count > 1);
+            btnDown.Enabled = (m_viewerBinding.Count > 1);
         }
     }
 }

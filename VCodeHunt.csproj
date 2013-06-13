@@ -82,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="FormFont.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFont.Designer.cs">
+      <DependentUpon>FormFont.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchBinary.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="ConfigSearchParams.cs" />
@@ -109,6 +115,10 @@
     <Compile Include="ConfigViewer.cs" />
     <Compile Include="SearchText.cs" />
     <Compile Include="ConfigWindowState.cs" />
+    <Compile Include="ConfigWindowFont.cs" />
+    <EmbeddedResource Include="FormFont.resx">
+      <DependentUpon>FormFont.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormViewer.resx">
       <DependentUpon>FormViewer.cs</DependentUpon>
     </EmbeddedResource>

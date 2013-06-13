@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Collections.Generic;
     using System.Xml.Serialization;
+    using System.Drawing;
 
     [Serializable()]
     public class AppConfig
@@ -16,6 +17,7 @@
 
             Viewers = new List<Viewer>();
             WindowState = new WindowState();
+            WindowFont = new WindowFont();
         }
 
         public void AddSearchParams(SearchParams searchParams)
@@ -44,5 +46,6 @@
         public List<SearchParams> SearchParamsHistory { get; set; }
         public List<Viewer> Viewers { get; set; }
         public WindowState WindowState { get; set; }
+        public WindowFont WindowFont { get; set; }
     }
 }

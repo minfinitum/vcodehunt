@@ -97,7 +97,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(347, 28);
+            this.btnBrowse.Location = new System.Drawing.Point(347, 26);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 3;
@@ -186,11 +186,13 @@
             this.Controls.Add(this.tbAppArgs);
             this.Controls.Add(this.tbAppPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Viewer";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FormViewer_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -146,22 +146,36 @@
         void LoadWindowState()
         {
             bool state = false;
-            if (m_config.WindowState.IsSizeValid)
+            if (m_config.WindowState.UseSize)
             {
                 state = true;
                 this.Size = m_config.WindowState.Size;
             }
 
-            if (m_config.WindowState.IsLocationValid)
+            if (m_config.WindowState.UseLocation)
             {
                 state = true;
                 this.Location = m_config.WindowState.Location;
             }
 
-            if (state)
+            if (m_config.WindowState.UseState)
             {
-                this.StartPosition = IsWindowStateValid(this.Location, this.Size) ? FormStartPosition.Manual : FormStartPosition.WindowsDefaultLocation;
+                state = true;
+                this.WindowState = m_config.WindowState.State;
             }
+
+            this.StartPosition = (state && IsWindowStateValid(this.Location, this.Size)) ? FormStartPosition.Manual : FormStartPosition.WindowsDefaultLocation;
+
+            if (m_config.WindowFont.UseFont)
+            {
+                SetWindowFont(m_config.WindowFont.Font);
+            }
+            else
+            {
+                Font font = new Font("Courier New", (float)8.25);
+                SetWindowFont(font);
+            }
+
         }
 
         private void FormMain_KeyUp(object sender, KeyEventArgs e)
@@ -170,21 +184,27 @@
             {
                 case Keys.F2:
                     cbPath.Focus();
+                    e.Handled = true;
                     break;
                 case Keys.F3:
                     cbFilters.Focus();
+                    e.Handled = true;
                     break;
                 case Keys.F4:
                     cbKeywords.Focus();
+                    e.Handled = true;
                     break;
                 case Keys.F5:
                     Search();
+                    e.Handled = true;
                     break;
                 case Keys.F6:
                     BrowseSearchPath();
+                    e.Handled = true;
                     break;
                 case Keys.F7:
                     cbSearchHistory.Focus();
+                    e.Handled = true;
                     break;
                 case Keys.Enter:
                     // prevent double 'click'
@@ -192,6 +212,7 @@
                     {
                         Search();
                     }
+                    e.Handled = true;
                     break;
             }
         }
@@ -958,8 +979,34 @@
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            m_config.WindowState.SetState(this.WindowState);
             WriteConfig();
         }
 
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SelectFont();
+        }
+
+        private void SelectFont()
+        {
+            FormFont ff = new FormFont(m_config.WindowFont.Font);
+            DialogResult result = ff.ShowDialog(this);
+            if (System.Windows.Forms.DialogResult.OK == result)
+            {
+                m_config.WindowFont.SetFont(ff.Selected);
+                SetWindowFont(m_config.WindowFont.Font);
+            }
+        }
+
+        private void SetWindowFont(Font font)
+        {
+            cbPath.Font = font;
+            cbFilters.Font = font;
+            cbKeywords.Font = font;
+            cbSearchHistory.Font = font;
+            viewFiles.Font = font;
+            viewMatches.Font = font;
+        }
     }
 }

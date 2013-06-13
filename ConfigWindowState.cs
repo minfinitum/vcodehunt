@@ -11,24 +11,34 @@ namespace VCodeHunt.Config
     {
         public WindowState()
         {
+            State = FormWindowState.Normal;
         }
 
         public void SetSize(Size size)
         {
-            IsSizeValid = true;
+            UseSize = true;
             Size = size;
         }
 
         public void SetLocation(Point location)
         {
-            IsLocationValid = true;
+            UseLocation = true;
             Location = location;
         }
 
-        public bool IsSizeValid { get; set; }
+        public void SetState(FormWindowState state)
+        {
+            UseState = true;
+            State = state;
+        }
+
+        public bool UseSize { get; set; }
         public Size Size { get; set; }
 
-        public bool IsLocationValid { get; set; }
+        public bool UseLocation { get; set; }
         public Point Location { get; set; }
+
+        public bool UseState { get; set; }
+        public FormWindowState State { get; set; }
     }
 }

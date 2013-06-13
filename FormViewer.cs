@@ -173,5 +173,17 @@
         {
             BrowseSearchPath();
         }
+
+        private void FormViewer_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch ((Keys)e.KeyChar)
+            {
+                case Keys.Escape:
+                    DialogResult = System.Windows.Forms.DialogResult.Cancel;
+                    e.Handled = true;
+                    this.Close();
+                    break;
+            }
+        }
     }
 }
