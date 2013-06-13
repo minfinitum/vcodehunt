@@ -14,8 +14,26 @@ namespace VCodeHunt.Config
         public SearchParams()
         {
             Path = string.Empty;
-            Filters = string.Empty;
+            Filters = "*";
             Keywords = string.Empty;
+
+            FileType = FileContentType.Detect;
+            UseRegexMatch = false;
+            UseCaseSensitiveMatch = false;
+            UseNegateSearch = false;
+            UseWholeWordMatch = false;
+            UseSubFolders = true;
+
+            ShowContextLines = true;
+            ContextLinesCount = 5;
+
+            ShowLineNumbers = true;
+
+            UseMinFileSize = false;
+            MinFileSize = 0;
+
+            UseMaxFileSize = false;
+            MaxFileSize = 0;
         }
 
         public string Path { get; set; }
@@ -65,21 +83,7 @@ namespace VCodeHunt.Config
             {
                 if (Keywords.Length <= 0 || Filters.Length <= 0 || Path.Length <= 0)
                     return string.Empty;
-
-                //int maxlen = 10;
-                string keywords = Keywords;
-                //if (keywords.Length > maxlen)
-                //    keywords = keywords.Substring(0, 8) + "...";
-
-                string filters = Filters;
-                //if (filters.Length > maxlen)
-                //    filters = filters.Substring(0, 8) + "...";
-
-                string path = Path;
-                //if (path.Length > maxlen)
-                //    path = "..." + path.Substring(path.Length - maxlen);
-
-                return string.Format("[{0}] - [{1}] [{2}] [{3}]", GetHashCode().ToString("X8"), keywords, filters, path);
+                return string.Format("[{0}] - [{1}] [{2}] [{3}]", GetHashCode().ToString("X8"), Keywords, Filters, Path);
             }
         }
     }

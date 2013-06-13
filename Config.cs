@@ -10,9 +10,12 @@
     {
         public AppConfig()
         {
+            // default configuration
             SearchParamsHistoryMaximum = 128;
             SearchParamsHistory = new List<Config.SearchParams>();
+
             Viewers = new List<Viewer>();
+            WindowState = new WindowState();
         }
 
         public void AddSearchParams(SearchParams searchParams)
@@ -35,10 +38,11 @@
         }
 
         [XmlIgnoreAttribute]
-        public SearchParams SearchParams { get { return (SearchParamsHistory.Count == 0) ? null : SearchParamsHistory.First(); } set { AddSearchParams(value); } }
+        public SearchParams SearchParams { get { return (SearchParamsHistory.Count == 0) ? new SearchParams() : SearchParamsHistory.First(); } set { AddSearchParams(value); } }
 
         public Int32 SearchParamsHistoryMaximum { get; set; }
         public List<SearchParams> SearchParamsHistory { get; set; }
         public List<Viewer> Viewers { get; set; }
+        public WindowState WindowState { get; set; }
     }
 }

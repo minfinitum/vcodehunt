@@ -52,7 +52,6 @@
         {
             InitializeComponent();
             this.Text = s_AppName;
-
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer, true);
 
             m_updateStatusCallback = new UpdateStatusCallback(UpdateStatus);
@@ -64,11 +63,13 @@
                 if (type != FileContentType.None)
                     cbFileContentType.Items.Add(type);
             }
-
+            
             SetDefaultConfig();
             ReadConfig();
-            BindViews();
 
+            BindViews();
+            LoadWindowState();
+            
             try
             {
                 lblVersion.Text = string.Format("Version: {0}", System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.FileVersion.ToString());
@@ -127,6 +128,40 @@
             }
 
             viewFiles.DataSource = m_fileMatchBinding;
+        }
+
+        bool IsWindowStateValid(Point location, Size size)
+        {
+            Rectangle rect = new Rectangle(location, size);
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                if (screen.WorkingArea.IntersectsWith(rect))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void LoadWindowState()
+        {
+            bool state = false;
+            if (m_config.WindowState.IsSizeValid)
+            {
+                state = true;
+                this.Size = m_config.WindowState.Size;
+            }
+
+            if (m_config.WindowState.IsLocationValid)
+            {
+                state = true;
+                this.Location = m_config.WindowState.Location;
+            }
+
+            if (state)
+            {
+                this.StartPosition = IsWindowStateValid(this.Location, this.Size) ? FormStartPosition.Manual : FormStartPosition.WindowsDefaultLocation;
+            }
         }
 
         private void FormMain_KeyUp(object sender, KeyEventArgs e)
@@ -210,6 +245,7 @@
             }
 
             m_config.AddSearchParams(config);
+
             WriteConfig();
             ReadConfig();
 
@@ -349,9 +385,17 @@
             m_searchThread = null;
         }
 
-        public static bool Like(string str, string wildcard)
+        public static bool Like(string value, string pattern)
         {
-            return new Regex("^" + Regex.Escape(wildcard).Replace(@"\*", ".*").Replace(@"\?", ".") + "$", RegexOptions.IgnoreCase | RegexOptions.Singleline).IsMatch(str);
+            // check if wildcards exist, simple string comparison
+            char [] wildcards = new char [] { '*', '?' };
+            if (pattern.IndexOfAny(wildcards) == -1)
+            {
+                return value.EndsWith(pattern, StringComparison.CurrentCultureIgnoreCase);
+            }
+
+            string regexPattern = "^" + Regex.Escape(pattern).Replace(@"\*", ".*").Replace(@"\?", ".") + "$";
+            return new Regex(regexPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline).IsMatch(value);
         }
 
         private void SetDefaultConfig()
@@ -649,11 +693,6 @@
             }
         }
 
-        private void FormMain_Resize(object sender, EventArgs e)
-        {
-
-        }
-
         private void LaunchFolder(string path)
         {
             Process.Start(path);
@@ -906,5 +945,21 @@
                 nudMaxFileSize.Value = nudMinFileSize.Value;
             }
         }
+
+        private void FormMain_Move(object sender, EventArgs e)
+        {
+            m_config.WindowState.SetLocation(this.Location);
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            m_config.WindowState.SetSize(this.Size);
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            WriteConfig();
+        }
+
     }
 }

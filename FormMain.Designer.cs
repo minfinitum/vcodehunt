@@ -285,7 +285,7 @@
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(12, 26);
+            this.lblPath.Location = new System.Drawing.Point(12, 27);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(50, 13);
             this.lblPath.TabIndex = 1;
@@ -547,9 +547,12 @@
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(640, 520);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "VCodeHunt";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FormMain_KeyUp);
+            this.Move += new System.EventHandler(this.FormMain_Move);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();

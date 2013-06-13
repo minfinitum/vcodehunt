@@ -7,7 +7,7 @@
         }
 
         public string AppPath { get; set; }
-        public string Extensions { get; set; }
         public string AppArgs { get; set; }
+        public string Extensions { get; set; }
     }
 }

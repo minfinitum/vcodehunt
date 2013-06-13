@@ -30,22 +30,18 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormViewer));
             this.tbAppPath = new System.Windows.Forms.TextBox();
-            this.tbExtensions = new System.Windows.Forms.TextBox();
             this.tbAppArgs = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lbApplication = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.lbExtension = new System.Windows.Forms.Label();
-            this.lbArguments = new System.Windows.Forms.Label();
+            this.lbAppArgs = new System.Windows.Forms.Label();
             this.lbArgumentFile = new System.Windows.Forms.Label();
             this.lbArgumentLine = new System.Windows.Forms.Label();
             this.tbPreview = new System.Windows.Forms.TextBox();
             this.lbPreview = new System.Windows.Forms.Label();
-            this.lblNotepadPP = new System.Windows.Forms.Label();
-            this.lblUltraEdit = new System.Windows.Forms.Label();
-            this.lblSublime = new System.Windows.Forms.Label();
-            this.lblExtensions = new System.Windows.Forms.Label();
+            this.lbExtensions = new System.Windows.Forms.Label();
+            this.tbExtensions = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tbAppPath
@@ -60,19 +56,9 @@
             this.tbAppPath.Text = "c:\\windows\\system32\\notepad.exe";
             this.tbAppPath.TextChanged += new System.EventHandler(this.tbApplicationPath_TextChanged);
             // 
-            // tbExtensions
-            // 
-            this.tbExtensions.Location = new System.Drawing.Point(12, 67);
-            this.tbExtensions.MaxLength = 260;
-            this.tbExtensions.Name = "tbExtensions";
-            this.tbExtensions.Size = new System.Drawing.Size(136, 20);
-            this.tbExtensions.TabIndex = 5;
-            this.tbExtensions.Text = "*";
-            this.tbExtensions.TextChanged += new System.EventHandler(this.tbExtension_TextChanged);
-            // 
             // tbAppArgs
             // 
-            this.tbAppArgs.Location = new System.Drawing.Point(12, 106);
+            this.tbAppArgs.Location = new System.Drawing.Point(12, 67);
             this.tbAppArgs.MaxLength = 260;
             this.tbAppArgs.Name = "tbAppArgs";
             this.tbAppArgs.Size = new System.Drawing.Size(410, 20);
@@ -119,41 +105,32 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // lbExtension
+            // lbAppArgs
             // 
-            this.lbExtension.AutoSize = true;
-            this.lbExtension.Location = new System.Drawing.Point(9, 51);
-            this.lbExtension.Name = "lbExtension";
-            this.lbExtension.Size = new System.Drawing.Size(53, 13);
-            this.lbExtension.TabIndex = 4;
-            this.lbExtension.Text = "Extension";
-            // 
-            // lbArguments
-            // 
-            this.lbArguments.AutoSize = true;
-            this.lbArguments.Location = new System.Drawing.Point(9, 90);
-            this.lbArguments.Name = "lbArguments";
-            this.lbArguments.Size = new System.Drawing.Size(57, 13);
-            this.lbArguments.TabIndex = 6;
-            this.lbArguments.Text = "Arguments";
+            this.lbAppArgs.AutoSize = true;
+            this.lbAppArgs.Location = new System.Drawing.Point(9, 51);
+            this.lbAppArgs.Name = "lbAppArgs";
+            this.lbAppArgs.Size = new System.Drawing.Size(57, 13);
+            this.lbAppArgs.TabIndex = 6;
+            this.lbAppArgs.Text = "Arguments";
             // 
             // lbArgumentFile
             // 
             this.lbArgumentFile.AutoSize = true;
-            this.lbArgumentFile.Location = new System.Drawing.Point(12, 129);
+            this.lbArgumentFile.Location = new System.Drawing.Point(12, 90);
             this.lbArgumentFile.Name = "lbArgumentFile";
-            this.lbArgumentFile.Size = new System.Drawing.Size(46, 13);
+            this.lbArgumentFile.Size = new System.Drawing.Size(75, 13);
             this.lbArgumentFile.TabIndex = 8;
-            this.lbArgumentFile.Text = "%1 - File";
+            this.lbArgumentFile.Text = "%1 - File name";
             // 
             // lbArgumentLine
             // 
             this.lbArgumentLine.AutoSize = true;
-            this.lbArgumentLine.Location = new System.Drawing.Point(12, 145);
+            this.lbArgumentLine.Location = new System.Drawing.Point(12, 104);
             this.lbArgumentLine.Name = "lbArgumentLine";
-            this.lbArgumentLine.Size = new System.Drawing.Size(50, 13);
+            this.lbArgumentLine.Size = new System.Drawing.Size(88, 13);
             this.lbArgumentLine.TabIndex = 9;
-            this.lbArgumentLine.Text = "%2 - Line";
+            this.lbArgumentLine.Text = "%2 - Line number";
             // 
             // tbPreview
             // 
@@ -172,63 +149,41 @@
             this.lbPreview.TabIndex = 10;
             this.lbPreview.Text = "Preview";
             // 
-            // lblNotepadPP
+            // lbExtensions
             // 
-            this.lblNotepadPP.AutoSize = true;
-            this.lblNotepadPP.Location = new System.Drawing.Point(211, 129);
-            this.lblNotepadPP.Name = "lblNotepadPP";
-            this.lblNotepadPP.Size = new System.Drawing.Size(116, 13);
-            this.lblNotepadPP.TabIndex = 12;
-            this.lblNotepadPP.Text = "Notepad++: \"%1\" -n%2";
+            this.lbExtensions.AutoSize = true;
+            this.lbExtensions.Location = new System.Drawing.Point(12, 126);
+            this.lbExtensions.Name = "lbExtensions";
+            this.lbExtensions.Size = new System.Drawing.Size(110, 13);
+            this.lbExtensions.TabIndex = 12;
+            this.lbExtensions.Text = "Supported Extensions";
             // 
-            // lblUltraEdit
+            // tbExtensions
             // 
-            this.lblUltraEdit.AutoSize = true;
-            this.lblUltraEdit.Location = new System.Drawing.Point(211, 145);
-            this.lblUltraEdit.Name = "lblUltraEdit";
-            this.lblUltraEdit.Size = new System.Drawing.Size(108, 13);
-            this.lblUltraEdit.TabIndex = 13;
-            this.lblUltraEdit.Text = "UltraEdit:     \"%1\"/%2";
-            // 
-            // lblSublime
-            // 
-            this.lblSublime.AutoSize = true;
-            this.lblSublime.Location = new System.Drawing.Point(211, 160);
-            this.lblSublime.Name = "lblSublime";
-            this.lblSublime.Size = new System.Drawing.Size(106, 13);
-            this.lblSublime.TabIndex = 14;
-            this.lblSublime.Text = "Sublime:      \"%1\":%2";
-            // 
-            // lblExtensions
-            // 
-            this.lblExtensions.AutoSize = true;
-            this.lblExtensions.Location = new System.Drawing.Point(154, 70);
-            this.lblExtensions.Name = "lblExtensions";
-            this.lblExtensions.Size = new System.Drawing.Size(245, 13);
-            this.lblExtensions.TabIndex = 15;
-            this.lblExtensions.Text = "Seperate multiple extensions using ; or , (* for files).";
+            this.tbExtensions.Location = new System.Drawing.Point(15, 142);
+            this.tbExtensions.MaxLength = 260;
+            this.tbExtensions.Name = "tbExtensions";
+            this.tbExtensions.Size = new System.Drawing.Size(410, 20);
+            this.tbExtensions.TabIndex = 13;
+            this.tbExtensions.Text = "*";
             // 
             // FormViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 248);
-            this.Controls.Add(this.lblExtensions);
-            this.Controls.Add(this.lblSublime);
-            this.Controls.Add(this.lblUltraEdit);
-            this.Controls.Add(this.lblNotepadPP);
+            this.Controls.Add(this.lbExtensions);
+            this.Controls.Add(this.tbExtensions);
             this.Controls.Add(this.lbPreview);
             this.Controls.Add(this.tbPreview);
             this.Controls.Add(this.lbArgumentLine);
             this.Controls.Add(this.lbArgumentFile);
-            this.Controls.Add(this.lbArguments);
-            this.Controls.Add(this.lbExtension);
+            this.Controls.Add(this.lbAppArgs);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.lbApplication);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.tbAppArgs);
-            this.Controls.Add(this.tbExtensions);
             this.Controls.Add(this.tbAppPath);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -244,21 +199,17 @@
         #endregion
 
         private System.Windows.Forms.TextBox tbAppPath;
-        private System.Windows.Forms.TextBox tbExtensions;
         private System.Windows.Forms.TextBox tbAppArgs;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lbApplication;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.Label lbExtension;
-        private System.Windows.Forms.Label lbArguments;
+        private System.Windows.Forms.Label lbAppArgs;
         private System.Windows.Forms.Label lbArgumentFile;
         private System.Windows.Forms.Label lbArgumentLine;
         private System.Windows.Forms.TextBox tbPreview;
         private System.Windows.Forms.Label lbPreview;
-        private System.Windows.Forms.Label lblNotepadPP;
-        private System.Windows.Forms.Label lblUltraEdit;
-        private System.Windows.Forms.Label lblSublime;
-        private System.Windows.Forms.Label lblExtensions;
+        private System.Windows.Forms.Label lbExtensions;
+        private System.Windows.Forms.TextBox tbExtensions;
     }
 }

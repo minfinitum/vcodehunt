@@ -6,6 +6,25 @@
 
     public partial class FormViewer : Form
     {
+        class App
+        {
+            public App(string name, string args)
+            {
+                Name = name;
+                Args = args;
+            }
+            public string Name { get; set; }
+            public string Args { get; set; }
+        };
+
+        App[] apps = new App[]
+            {
+                new App("notepad++.exe", "\"%1\" -n%2"),
+                new App("ultraedit.exe", "\"%1\"/%2"),
+                new App("sublime_text.exe", "\"%1\":%2"),
+                new App("devenv.exe", "/Edit \"%1\" /Command \"Edit.GoTo %2\"")
+            };
+
         ToolTip _tt = new ToolTip();
         public FormViewer()
         {
@@ -48,8 +67,18 @@
         public void SetToolTips()
         {
             // tool tips
-            string argtips = "Examples:\n notepad++: \"%1\" -n%2\ndevenv: /Edit \"%1\" /Command \"Edit.GoTo %2\"";
-            _tt.SetToolTip(this.lbArguments, argtips);
+            string argtips = "Examples:" + Environment.NewLine;
+            foreach (App app in apps)
+            {
+                argtips += string.Format("{0}: {1}", app.Name, app.Args) + Environment.NewLine;
+            }
+            _tt.SetToolTip(this.lbAppArgs, argtips);
+            _tt.SetToolTip(this.tbAppArgs, argtips);
+
+            string extentiontips = "Multiple extensions use ';' or ',' (* for all files).";
+            _tt.SetToolTip(this.lbExtensions, extentiontips);
+            _tt.SetToolTip(this.tbExtensions, extentiontips);
+
             _tt.Active = true;
         }
 
@@ -130,19 +159,13 @@
                 tbAppPath.Text = ofd.FileName;
 
                 // autodetect applications
-                if (tbAppPath.Text.EndsWith("notepad++.exe"))
+                foreach (App app in apps)
                 {
-                    tbAppArgs.Text = "\"%1\" -n%2";
+                    if (tbAppPath.Text.EndsWith(app.Name))
+                    { 
+                        tbAppArgs.Text = app.Args;
+                    }
                 }
-                else if (tbAppPath.Text.EndsWith("ultraedit.exe"))
-                {
-                    tbAppArgs.Text = "\"%1\"/%2";
-                }
-                else if (tbAppPath.Text.EndsWith("sublime_text.exe"))
-                {
-                    tbAppArgs.Text = "\"%1\":%2";
-                }
-
             }
         }
 
