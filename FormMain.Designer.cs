@@ -47,6 +47,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblSearchHistory = new System.Windows.Forms.Label();
             this.cbSearchHistory = new System.Windows.Forms.ComboBox();
@@ -72,7 +73,6 @@
             this.nudContextLines = new System.Windows.Forms.NumericUpDown();
             this.lblFileContentType = new System.Windows.Forms.Label();
             this.cbFileContentType = new System.Windows.Forms.ComboBox();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -222,14 +222,14 @@
             // clearHistoryToolStripMenuItem
             // 
             this.clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
-            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.clearHistoryToolStripMenuItem.Text = "Clear History";
             this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -245,9 +245,16 @@
             // editorsToolStripMenuItem
             // 
             this.editorsToolStripMenuItem.Name = "editorsToolStripMenuItem";
-            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.editorsToolStripMenuItem.Text = "Editors";
             this.editorsToolStripMenuItem.Click += new System.EventHandler(this.editorsToolStripMenuItem_Click);
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // lblVersion
             // 
@@ -376,7 +383,7 @@
             0,
             0});
             this.nudMaxFileSize.Name = "nudMaxFileSize";
-            this.nudMaxFileSize.Size = new System.Drawing.Size(136, 20);
+            this.nudMaxFileSize.Size = new System.Drawing.Size(140, 20);
             this.nudMaxFileSize.TabIndex = 22;
             // 
             // nudMinFileSize
@@ -389,7 +396,7 @@
             0,
             0});
             this.nudMinFileSize.Name = "nudMinFileSize";
-            this.nudMinFileSize.Size = new System.Drawing.Size(136, 20);
+            this.nudMinFileSize.Size = new System.Drawing.Size(140, 20);
             this.nudMinFileSize.TabIndex = 20;
             // 
             // cbMaxFileSize
@@ -490,7 +497,7 @@
             this.nudContextLines.Enabled = false;
             this.nudContextLines.Location = new System.Drawing.Point(140, 302);
             this.nudContextLines.Name = "nudContextLines";
-            this.nudContextLines.Size = new System.Drawing.Size(136, 20);
+            this.nudContextLines.Size = new System.Drawing.Size(140, 20);
             this.nudContextLines.TabIndex = 17;
             // 
             // lblFileContentType
@@ -508,15 +515,8 @@
             this.cbFileContentType.FormattingEnabled = true;
             this.cbFileContentType.Location = new System.Drawing.Point(140, 176);
             this.cbFileContentType.Name = "cbFileContentType";
-            this.cbFileContentType.Size = new System.Drawing.Size(136, 21);
+            this.cbFileContentType.Size = new System.Drawing.Size(140, 21);
             this.cbFileContentType.TabIndex = 10;
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // FormMain
             // 
