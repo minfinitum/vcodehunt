@@ -969,12 +969,14 @@
 
         private void FormMain_Move(object sender, EventArgs e)
         {
-            m_config.WindowState.SetLocation(this.Location);
+            if (this.WindowState == FormWindowState.Normal)
+                m_config.WindowState.SetLocation(this.Location);
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
         {
-            m_config.WindowState.SetSize(this.Size);
+            if(this.WindowState == FormWindowState.Normal)
+                m_config.WindowState.SetSize(this.Size);
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
