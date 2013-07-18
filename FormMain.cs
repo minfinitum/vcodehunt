@@ -333,7 +333,7 @@
 
             try
             {
-                string[] filters = context.Filters.Split(new char[] { ';', ',' });
+                string[] filters = context.Filters.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
                 SearchOption directorySearchOption = context.UseSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
                 foreach (string file in Directory.EnumerateFiles(context.Path, "*", directorySearchOption))
                 {
