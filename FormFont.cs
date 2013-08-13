@@ -19,7 +19,6 @@ namespace VCodeHunt
 
             InitializeComponent();
 
-            int index = 0;
             int selectedIndex = 0;
             foreach (FontFamily ff in FontFamily.Families)
             {
@@ -29,10 +28,8 @@ namespace VCodeHunt
                     cbFont.Items.Add(font.Name);
 
                     if (font.Name == Selected.Name)
-                        selectedIndex = index;
+                        selectedIndex = cbFont.Items.Count - 1;
                 }
-
-                index++;
             }
 
             cbFont.SelectedIndex = selectedIndex;
