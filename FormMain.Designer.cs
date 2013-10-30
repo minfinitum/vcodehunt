@@ -47,6 +47,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblVersion = new System.Windows.Forms.Label();
             this.lblSearchHistory = new System.Windows.Forms.Label();
             this.cbSearchHistory = new System.Windows.Forms.ComboBox();
@@ -72,7 +73,6 @@
             this.nudContextLines = new System.Windows.Forms.NumericUpDown();
             this.lblFileContentType = new System.Windows.Forms.Label();
             this.cbFileContentType = new System.Windows.Forms.ComboBox();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -222,14 +222,14 @@
             // clearHistoryToolStripMenuItem
             // 
             this.clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
-            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.clearHistoryToolStripMenuItem.Text = "Clear History";
             this.clearHistoryToolStripMenuItem.Click += new System.EventHandler(this.clearHistoryToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -245,9 +245,16 @@
             // editorsToolStripMenuItem
             // 
             this.editorsToolStripMenuItem.Name = "editorsToolStripMenuItem";
-            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editorsToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.editorsToolStripMenuItem.Text = "Editors";
             this.editorsToolStripMenuItem.Click += new System.EventHandler(this.editorsToolStripMenuItem_Click);
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // lblVersion
             // 
@@ -369,7 +376,7 @@
             // nudMaxFileSize
             // 
             this.nudMaxFileSize.Enabled = false;
-            this.nudMaxFileSize.Location = new System.Drawing.Point(144, 395);
+            this.nudMaxFileSize.Location = new System.Drawing.Point(144, 391);
             this.nudMaxFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -382,7 +389,7 @@
             // nudMinFileSize
             // 
             this.nudMinFileSize.Enabled = false;
-            this.nudMinFileSize.Location = new System.Drawing.Point(144, 369);
+            this.nudMinFileSize.Location = new System.Drawing.Point(144, 368);
             this.nudMinFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -397,9 +404,9 @@
             this.cbMaxFileSize.AutoSize = true;
             this.cbMaxFileSize.Location = new System.Drawing.Point(12, 392);
             this.cbMaxFileSize.Name = "cbMaxFileSize";
-            this.cbMaxFileSize.Size = new System.Drawing.Size(112, 17);
+            this.cbMaxFileSize.Size = new System.Drawing.Size(122, 17);
             this.cbMaxFileSize.TabIndex = 21;
-            this.cbMaxFileSize.Text = "Maximum File Size";
+            this.cbMaxFileSize.Text = "Max File Size (bytes)";
             this.cbMaxFileSize.UseVisualStyleBackColor = true;
             this.cbMaxFileSize.CheckedChanged += new System.EventHandler(this.cbMaxFileSize_CheckedChanged);
             // 
@@ -479,16 +486,16 @@
             this.cbMinFileSize.AutoSize = true;
             this.cbMinFileSize.Location = new System.Drawing.Point(12, 369);
             this.cbMinFileSize.Name = "cbMinFileSize";
-            this.cbMinFileSize.Size = new System.Drawing.Size(109, 17);
+            this.cbMinFileSize.Size = new System.Drawing.Size(100, 17);
             this.cbMinFileSize.TabIndex = 19;
-            this.cbMinFileSize.Text = "Minimum File Size";
+            this.cbMinFileSize.Text = "Min Size (bytes)";
             this.cbMinFileSize.UseVisualStyleBackColor = true;
             this.cbMinFileSize.CheckedChanged += new System.EventHandler(this.cbMinFileSize_CheckedChanged);
             // 
             // nudContextLines
             // 
             this.nudContextLines.Enabled = false;
-            this.nudContextLines.Location = new System.Drawing.Point(143, 302);
+            this.nudContextLines.Location = new System.Drawing.Point(143, 304);
             this.nudContextLines.Name = "nudContextLines";
             this.nudContextLines.Size = new System.Drawing.Size(137, 20);
             this.nudContextLines.TabIndex = 17;
@@ -510,13 +517,6 @@
             this.cbFileContentType.Name = "cbFileContentType";
             this.cbFileContentType.Size = new System.Drawing.Size(136, 21);
             this.cbFileContentType.TabIndex = 10;
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.fontToolStripMenuItem.Text = "Font";
-            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
             // FormMain
             // 
