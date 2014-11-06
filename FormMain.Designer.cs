@@ -55,8 +55,8 @@
             this.cbPath = new System.Windows.Forms.ComboBox();
             this.btnAction = new System.Windows.Forms.Button();
             this.btnBrowse = new System.Windows.Forms.Button();
-            this.lblFilter = new System.Windows.Forms.Label();
-            this.cbFilters = new System.Windows.Forms.ComboBox();
+            this.lblFilterInclusions = new System.Windows.Forms.Label();
+            this.cbFiltersInclusion = new System.Windows.Forms.ComboBox();
             this.lblSearch = new System.Windows.Forms.Label();
             this.cbKeywords = new System.Windows.Forms.ComboBox();
             this.nudMaxFileSize = new System.Windows.Forms.NumericUpDown();
@@ -73,6 +73,8 @@
             this.nudContextLines = new System.Windows.Forms.NumericUpDown();
             this.lblFileContentType = new System.Windows.Forms.Label();
             this.cbFileContentType = new System.Windows.Forms.ComboBox();
+            this.lbFiltersExclusion = new System.Windows.Forms.Label();
+            this.cbFiltersExclusion = new System.Windows.Forms.ComboBox();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -90,7 +92,7 @@
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 539);
+            this.statusStrip.Location = new System.Drawing.Point(0, 579);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(1008, 22);
             this.statusStrip.TabIndex = 25;
@@ -107,7 +109,7 @@
             this.splitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitter.Location = new System.Drawing.Point(290, 51);
+            this.splitter.Location = new System.Drawing.Point(290, 81);
             this.splitter.Name = "splitter";
             this.splitter.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -118,8 +120,8 @@
             // splitter.Panel2
             // 
             this.splitter.Panel2.Controls.Add(this.viewMatches);
-            this.splitter.Size = new System.Drawing.Size(712, 458);
-            this.splitter.SplitterDistance = 148;
+            this.splitter.Size = new System.Drawing.Size(712, 498);
+            this.splitter.SplitterDistance = 146;
             this.splitter.TabIndex = 6;
             // 
             // viewFiles
@@ -132,7 +134,7 @@
             this.viewFiles.Name = "viewFiles";
             this.viewFiles.ReadOnly = true;
             this.viewFiles.RowHeadersVisible = false;
-            this.viewFiles.Size = new System.Drawing.Size(706, 145);
+            this.viewFiles.Size = new System.Drawing.Size(706, 143);
             this.viewFiles.TabIndex = 0;
             this.viewFiles.SelectionChanged += new System.EventHandler(this.viewFiles_SelectionChanged);
             this.viewFiles.MouseClick += new System.Windows.Forms.MouseEventHandler(this.viewFiles_MouseClick);
@@ -146,7 +148,7 @@
             this.viewMatches.Location = new System.Drawing.Point(0, 0);
             this.viewMatches.Name = "viewMatches";
             this.viewMatches.ReadOnly = true;
-            this.viewMatches.Size = new System.Drawing.Size(712, 306);
+            this.viewMatches.Size = new System.Drawing.Size(712, 348);
             this.viewMatches.TabIndex = 0;
             this.viewMatches.Text = "";
             this.viewMatches.WordWrap = false;
@@ -269,32 +271,31 @@
             // 
             // lblSearchHistory
             // 
-            this.lblSearchHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSearchHistory.AutoSize = true;
-            this.lblSearchHistory.Location = new System.Drawing.Point(9, 517);
+            this.lblSearchHistory.Location = new System.Drawing.Point(9, 25);
             this.lblSearchHistory.Name = "lblSearchHistory";
             this.lblSearchHistory.Size = new System.Drawing.Size(60, 13);
             this.lblSearchHistory.TabIndex = 23;
-            this.lblSearchHistory.Text = "&History (F7)";
+            this.lblSearchHistory.Text = "&History (F8)";
             // 
             // cbSearchHistory
             // 
-            this.cbSearchHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.cbSearchHistory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSearchHistory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSearchHistory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbSearchHistory.FormattingEnabled = true;
-            this.cbSearchHistory.Location = new System.Drawing.Point(75, 515);
+            this.cbSearchHistory.Location = new System.Drawing.Point(78, 22);
             this.cbSearchHistory.MaxDropDownItems = 32;
             this.cbSearchHistory.Name = "cbSearchHistory";
-            this.cbSearchHistory.Size = new System.Drawing.Size(927, 21);
+            this.cbSearchHistory.Size = new System.Drawing.Size(921, 21);
             this.cbSearchHistory.TabIndex = 24;
             this.cbSearchHistory.SelectedIndexChanged += new System.EventHandler(this.cbSearchHistory_SelectedIndexChanged);
             // 
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(12, 27);
+            this.lblPath.Location = new System.Drawing.Point(9, 52);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(50, 13);
             this.lblPath.TabIndex = 1;
@@ -308,14 +309,14 @@
             this.cbPath.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.cbPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbPath.FormattingEnabled = true;
-            this.cbPath.Location = new System.Drawing.Point(81, 24);
+            this.cbPath.Location = new System.Drawing.Point(78, 49);
             this.cbPath.Name = "cbPath";
             this.cbPath.Size = new System.Drawing.Size(921, 21);
             this.cbPath.TabIndex = 2;
             // 
             // btnAction
             // 
-            this.btnAction.Location = new System.Drawing.Point(205, 134);
+            this.btnAction.Location = new System.Drawing.Point(205, 204);
             this.btnAction.Name = "btnAction";
             this.btnAction.Size = new System.Drawing.Size(75, 23);
             this.btnAction.TabIndex = 8;
@@ -325,7 +326,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(12, 134);
+            this.btnBrowse.Location = new System.Drawing.Point(12, 204);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 7;
@@ -333,34 +334,34 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
-            // lblFilter
+            // lblFilterInclusions
             // 
-            this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(12, 51);
-            this.lblFilter.Name = "lblFilter";
-            this.lblFilter.Size = new System.Drawing.Size(69, 13);
-            this.lblFilter.TabIndex = 3;
-            this.lblFilter.Text = "&File Filter (F3)";
+            this.lblFilterInclusions.AutoSize = true;
+            this.lblFilterInclusions.Location = new System.Drawing.Point(9, 81);
+            this.lblFilterInclusions.Name = "lblFilterInclusions";
+            this.lblFilterInclusions.Size = new System.Drawing.Size(114, 13);
+            this.lblFilterInclusions.TabIndex = 3;
+            this.lblFilterInclusions.Text = "&File Filter Inclusion (F9)";
             // 
-            // cbFilters
+            // cbFiltersInclusion
             // 
-            this.cbFilters.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cbFilters.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbFilters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.cbFilters.FormattingEnabled = true;
-            this.cbFilters.Location = new System.Drawing.Point(12, 67);
-            this.cbFilters.Name = "cbFilters";
-            this.cbFilters.Size = new System.Drawing.Size(268, 21);
-            this.cbFilters.TabIndex = 4;
+            this.cbFiltersInclusion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbFiltersInclusion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbFiltersInclusion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cbFiltersInclusion.FormattingEnabled = true;
+            this.cbFiltersInclusion.Location = new System.Drawing.Point(12, 97);
+            this.cbFiltersInclusion.Name = "cbFiltersInclusion";
+            this.cbFiltersInclusion.Size = new System.Drawing.Size(268, 21);
+            this.cbFiltersInclusion.TabIndex = 4;
             // 
             // lblSearch
             // 
             this.lblSearch.AutoSize = true;
-            this.lblSearch.Location = new System.Drawing.Point(12, 91);
+            this.lblSearch.Location = new System.Drawing.Point(11, 161);
             this.lblSearch.Name = "lblSearch";
-            this.lblSearch.Size = new System.Drawing.Size(74, 13);
+            this.lblSearch.Size = new System.Drawing.Size(80, 13);
             this.lblSearch.TabIndex = 5;
-            this.lblSearch.Text = "&Keywords (F4)";
+            this.lblSearch.Text = "&Keywords (F11)";
             // 
             // cbKeywords
             // 
@@ -368,7 +369,7 @@
             this.cbKeywords.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbKeywords.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cbKeywords.FormattingEnabled = true;
-            this.cbKeywords.Location = new System.Drawing.Point(12, 107);
+            this.cbKeywords.Location = new System.Drawing.Point(12, 177);
             this.cbKeywords.Name = "cbKeywords";
             this.cbKeywords.Size = new System.Drawing.Size(268, 21);
             this.cbKeywords.TabIndex = 6;
@@ -376,7 +377,7 @@
             // nudMaxFileSize
             // 
             this.nudMaxFileSize.Enabled = false;
-            this.nudMaxFileSize.Location = new System.Drawing.Point(144, 391);
+            this.nudMaxFileSize.Location = new System.Drawing.Point(146, 469);
             this.nudMaxFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -389,7 +390,7 @@
             // nudMinFileSize
             // 
             this.nudMinFileSize.Enabled = false;
-            this.nudMinFileSize.Location = new System.Drawing.Point(144, 368);
+            this.nudMinFileSize.Location = new System.Drawing.Point(146, 446);
             this.nudMinFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -402,7 +403,7 @@
             // cbMaxFileSize
             // 
             this.cbMaxFileSize.AutoSize = true;
-            this.cbMaxFileSize.Location = new System.Drawing.Point(12, 392);
+            this.cbMaxFileSize.Location = new System.Drawing.Point(14, 470);
             this.cbMaxFileSize.Name = "cbMaxFileSize";
             this.cbMaxFileSize.Size = new System.Drawing.Size(122, 17);
             this.cbMaxFileSize.TabIndex = 21;
@@ -413,7 +414,7 @@
             // cbShowContext
             // 
             this.cbShowContext.AutoSize = true;
-            this.cbShowContext.Location = new System.Drawing.Point(12, 305);
+            this.cbShowContext.Location = new System.Drawing.Point(14, 383);
             this.cbShowContext.Name = "cbShowContext";
             this.cbShowContext.Size = new System.Drawing.Size(92, 17);
             this.cbShowContext.TabIndex = 16;
@@ -424,7 +425,7 @@
             // cbSearchCaseSensitive
             // 
             this.cbSearchCaseSensitive.AutoSize = true;
-            this.cbSearchCaseSensitive.Location = new System.Drawing.Point(12, 203);
+            this.cbSearchCaseSensitive.Location = new System.Drawing.Point(14, 281);
             this.cbSearchCaseSensitive.Name = "cbSearchCaseSensitive";
             this.cbSearchCaseSensitive.Size = new System.Drawing.Size(129, 17);
             this.cbSearchCaseSensitive.TabIndex = 11;
@@ -434,7 +435,7 @@
             // cbSearchWholeWord
             // 
             this.cbSearchWholeWord.AutoSize = true;
-            this.cbSearchWholeWord.Location = new System.Drawing.Point(143, 203);
+            this.cbSearchWholeWord.Location = new System.Drawing.Point(145, 281);
             this.cbSearchWholeWord.Name = "cbSearchWholeWord";
             this.cbSearchWholeWord.Size = new System.Drawing.Size(119, 17);
             this.cbSearchWholeWord.TabIndex = 12;
@@ -444,7 +445,7 @@
             // cbSearchUseRegex
             // 
             this.cbSearchUseRegex.AutoSize = true;
-            this.cbSearchUseRegex.Location = new System.Drawing.Point(12, 226);
+            this.cbSearchUseRegex.Location = new System.Drawing.Point(14, 304);
             this.cbSearchUseRegex.Name = "cbSearchUseRegex";
             this.cbSearchUseRegex.Size = new System.Drawing.Size(97, 17);
             this.cbSearchUseRegex.TabIndex = 13;
@@ -454,7 +455,7 @@
             // cbSearchNegate
             // 
             this.cbSearchNegate.AutoSize = true;
-            this.cbSearchNegate.Location = new System.Drawing.Point(12, 249);
+            this.cbSearchNegate.Location = new System.Drawing.Point(14, 327);
             this.cbSearchNegate.Name = "cbSearchNegate";
             this.cbSearchNegate.Size = new System.Drawing.Size(98, 17);
             this.cbSearchNegate.TabIndex = 14;
@@ -464,7 +465,7 @@
             // cbSearchSubFolders
             // 
             this.cbSearchSubFolders.AutoSize = true;
-            this.cbSearchSubFolders.Location = new System.Drawing.Point(12, 346);
+            this.cbSearchSubFolders.Location = new System.Drawing.Point(14, 424);
             this.cbSearchSubFolders.Name = "cbSearchSubFolders";
             this.cbSearchSubFolders.Size = new System.Drawing.Size(113, 17);
             this.cbSearchSubFolders.TabIndex = 18;
@@ -474,7 +475,7 @@
             // cbSearchShowLineNumbers
             // 
             this.cbSearchShowLineNumbers.AutoSize = true;
-            this.cbSearchShowLineNumbers.Location = new System.Drawing.Point(12, 282);
+            this.cbSearchShowLineNumbers.Location = new System.Drawing.Point(14, 360);
             this.cbSearchShowLineNumbers.Name = "cbSearchShowLineNumbers";
             this.cbSearchShowLineNumbers.Size = new System.Drawing.Size(121, 17);
             this.cbSearchShowLineNumbers.TabIndex = 15;
@@ -484,7 +485,7 @@
             // cbMinFileSize
             // 
             this.cbMinFileSize.AutoSize = true;
-            this.cbMinFileSize.Location = new System.Drawing.Point(12, 369);
+            this.cbMinFileSize.Location = new System.Drawing.Point(14, 447);
             this.cbMinFileSize.Name = "cbMinFileSize";
             this.cbMinFileSize.Size = new System.Drawing.Size(100, 17);
             this.cbMinFileSize.TabIndex = 19;
@@ -495,7 +496,7 @@
             // nudContextLines
             // 
             this.nudContextLines.Enabled = false;
-            this.nudContextLines.Location = new System.Drawing.Point(143, 304);
+            this.nudContextLines.Location = new System.Drawing.Point(145, 382);
             this.nudContextLines.Name = "nudContextLines";
             this.nudContextLines.Size = new System.Drawing.Size(137, 20);
             this.nudContextLines.TabIndex = 17;
@@ -503,7 +504,7 @@
             // lblFileContentType
             // 
             this.lblFileContentType.AutoSize = true;
-            this.lblFileContentType.Location = new System.Drawing.Point(12, 179);
+            this.lblFileContentType.Location = new System.Drawing.Point(14, 257);
             this.lblFileContentType.Name = "lblFileContentType";
             this.lblFileContentType.Size = new System.Drawing.Size(63, 13);
             this.lblFileContentType.TabIndex = 9;
@@ -513,16 +514,38 @@
             // 
             this.cbFileContentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFileContentType.FormattingEnabled = true;
-            this.cbFileContentType.Location = new System.Drawing.Point(144, 176);
+            this.cbFileContentType.Location = new System.Drawing.Point(146, 254);
             this.cbFileContentType.Name = "cbFileContentType";
             this.cbFileContentType.Size = new System.Drawing.Size(136, 21);
             this.cbFileContentType.TabIndex = 10;
+            // 
+            // lbFiltersExclusion
+            // 
+            this.lbFiltersExclusion.AutoSize = true;
+            this.lbFiltersExclusion.Location = new System.Drawing.Point(11, 121);
+            this.lbFiltersExclusion.Name = "lbFiltersExclusion";
+            this.lbFiltersExclusion.Size = new System.Drawing.Size(123, 13);
+            this.lbFiltersExclusion.TabIndex = 27;
+            this.lbFiltersExclusion.Text = "&File Filter Exclusion (F10)";
+            // 
+            // cbFiltersExclusion
+            // 
+            this.cbFiltersExclusion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cbFiltersExclusion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbFiltersExclusion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cbFiltersExclusion.FormattingEnabled = true;
+            this.cbFiltersExclusion.Location = new System.Drawing.Point(12, 137);
+            this.cbFiltersExclusion.Name = "cbFiltersExclusion";
+            this.cbFiltersExclusion.Size = new System.Drawing.Size(268, 21);
+            this.cbFiltersExclusion.TabIndex = 28;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 561);
+            this.ClientSize = new System.Drawing.Size(1008, 601);
+            this.Controls.Add(this.lbFiltersExclusion);
+            this.Controls.Add(this.cbFiltersExclusion);
             this.Controls.Add(this.nudMaxFileSize);
             this.Controls.Add(this.nudMinFileSize);
             this.Controls.Add(this.cbMaxFileSize);
@@ -539,8 +562,8 @@
             this.Controls.Add(this.cbFileContentType);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.btnBrowse);
-            this.Controls.Add(this.lblFilter);
-            this.Controls.Add(this.cbFilters);
+            this.Controls.Add(this.lblFilterInclusions);
+            this.Controls.Add(this.cbFiltersInclusion);
             this.Controls.Add(this.lblSearch);
             this.Controls.Add(this.cbKeywords);
             this.Controls.Add(this.lblPath);
@@ -607,8 +630,8 @@
         private System.Windows.Forms.ComboBox cbPath;
         private System.Windows.Forms.Button btnAction;
         private System.Windows.Forms.Button btnBrowse;
-        private System.Windows.Forms.Label lblFilter;
-        private System.Windows.Forms.ComboBox cbFilters;
+        private System.Windows.Forms.Label lblFilterInclusions;
+        private System.Windows.Forms.ComboBox cbFiltersInclusion;
         private System.Windows.Forms.Label lblSearch;
         private System.Windows.Forms.ComboBox cbKeywords;
         private System.Windows.Forms.NumericUpDown nudMaxFileSize;
@@ -626,6 +649,8 @@
         private System.Windows.Forms.Label lblFileContentType;
         private System.Windows.Forms.ComboBox cbFileContentType;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        private System.Windows.Forms.Label lbFiltersExclusion;
+        private System.Windows.Forms.ComboBox cbFiltersExclusion;
     }
 }
 

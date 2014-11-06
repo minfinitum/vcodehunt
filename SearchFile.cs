@@ -13,7 +13,7 @@
         private EventWaitHandle m_terminate = new EventWaitHandle(false, EventResetMode.ManualReset);
 
         public class KeywordMatch
-        {            
+        {
             public KeywordMatch()
             {
                 this.ContextPre = new Queue<string>();
@@ -142,7 +142,7 @@
                         }
                     }
                 }
-                
+
                 if (searchParams.ShowLineNumbers)
                 {
                     formatted += string.Format("{0} {1}", IndexToString(Index), Value) + Environment.NewLine;
@@ -219,7 +219,7 @@
                     break;
                 case FileContentType.Binary:
                     {
-                        SearchBinary bin = new SearchBinary(m_terminate);                        
+                        SearchBinary bin = new SearchBinary(m_terminate);
                         matches = bin.Search(context, file);
                         break;
                     }

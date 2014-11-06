@@ -63,13 +63,13 @@
                 if (type != FileContentType.None)
                     cbFileContentType.Items.Add(type);
             }
-            
+
             SetDefaultConfig();
             ReadConfig();
 
             BindViews();
             LoadWindowState();
-            
+
             try
             {
                 lblVersion.Text = string.Format("Version: {0}", System.Diagnostics.Process.GetCurrentProcess().MainModule.FileVersionInfo.FileVersion.ToString());
@@ -186,14 +186,6 @@
                     cbPath.Focus();
                     e.Handled = true;
                     break;
-                case Keys.F3:
-                    cbFilters.Focus();
-                    e.Handled = true;
-                    break;
-                case Keys.F4:
-                    cbKeywords.Focus();
-                    e.Handled = true;
-                    break;
                 case Keys.F5:
                     Search();
                     e.Handled = true;
@@ -202,8 +194,20 @@
                     BrowseSearchPath();
                     e.Handled = true;
                     break;
-                case Keys.F7:
+                case Keys.F8:
                     cbSearchHistory.Focus();
+                    e.Handled = true;
+                    break;
+                case Keys.F9:
+                    cbFiltersInclusion.Focus();
+                    e.Handled = true;
+                    break;
+                case Keys.F10:
+                    cbFiltersExclusion.Focus();
+                    e.Handled = true;
+                    break;
+                case Keys.F11:
+                    cbKeywords.Focus();
                     e.Handled = true;
                     break;
                 case Keys.Enter:
@@ -221,7 +225,9 @@
         {
             SearchParams config = new SearchParams();
             config.Path = cbPath.Text;
-            config.Filters = cbFilters.Text;
+            config.FiltersInclusions = cbFiltersInclusion.Text;
+            config.FiltersExclusions = cbFiltersExclusion.Text;
+
             config.Keywords = cbKeywords.Text;
             config.FileType = (FileContentType)cbFileContentType.Items[cbFileContentType.SelectedIndex];
 
@@ -260,7 +266,7 @@
             m_matchToLineTable.Clear();
             viewMatches.Clear();
 
-            if (string.IsNullOrEmpty(config.Path) || string.IsNullOrEmpty(config.Filters) || string.IsNullOrEmpty(config.Keywords))
+            if (string.IsNullOrEmpty(config.Path) || string.IsNullOrEmpty(config.Keywords) || (string.IsNullOrEmpty(config.FiltersInclusions) && string.IsNullOrEmpty(config.FiltersExclusions)))
             {
                 return;
             }
@@ -333,7 +339,9 @@
 
             try
             {
-                string[] filters = context.Filters.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] filtersInclusion = context.FiltersInclusions.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] filtersExclusion = context.FiltersExclusions.Split(new char[] { ';', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
                 SearchOption directorySearchOption = context.UseSubFolders ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
                 foreach (string file in Directory.EnumerateFiles(context.Path, "*", directorySearchOption))
                 {
@@ -357,25 +365,66 @@
                         }
                     }
                     catch (Exception)
-                    { 
+                    {
                     }
 
-                    foreach (string filter in filters)
+                    bool isExcluded = false;
+                    if (filtersExclusion != null && filtersExclusion.Count() > 0)
                     {
-                        if (m_terminate.WaitOne(0))
+                        foreach (string exclusion in filtersExclusion)
                         {
-                            break;
-                        }
-
-                        List<SearchFile.KeywordMatch> matches = null;
-                        try
-                        {
-                            if (Like(file, filter))
+                            if (m_terminate.WaitOne(0))
                             {
-                                UpdateStatus(UpdateStatusType.STATUS_BAR, "Scanning file: " + file);
-                                matches = m_filesearch.Search(context, file);
+                                break;
                             }
 
+                            try
+                            {
+                                if (Like(file, exclusion))
+                                {
+                                    isExcluded = true;
+                                    break;
+                                }
+                            }
+                            catch (SystemException ex)
+                            {
+                                Debug.WriteLine("[{0}][{1}]", ex.Source, ex.Message);
+                            }
+                        }
+                    }
+
+                    bool isIncluded = false;
+                    if (filtersInclusion != null && filtersInclusion.Count() > 0)
+                    {
+                        foreach (string filter in filtersInclusion)
+                        {
+                            if (m_terminate.WaitOne(0))
+                            {
+                                break;
+                            }
+
+                            try
+                            {
+                                if(Like(file, filter))
+                                {
+                                    isIncluded = true;
+                                    break;
+                                }
+                            }
+                            catch (SystemException ex)
+                            {
+                                Debug.WriteLine("[{0}][{1}]", ex.Source, ex.Message);
+                            }
+                        }
+                    }
+
+                    if(!isExcluded && isIncluded)
+                    {
+                        try
+                        {
+                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Scanning file: " + file);
+
+                            List<SearchFile.KeywordMatch> matches = m_filesearch.Search(context, file);
                             if (matches != null)
                             {
                                 matchcount += matches.Count;
@@ -451,7 +500,7 @@
             }
 
             cbPath.Items.Clear();
-            cbFilters.Items.Clear();
+            cbFiltersInclusion.Items.Clear();
             cbKeywords.Items.Clear();
             cbSearchHistory.Items.Clear();
 
@@ -459,8 +508,10 @@
             {
                 if (!cbPath.Items.Contains(searchParams.Path))
                     cbPath.Items.Add(searchParams.Path);
-                if (!cbFilters.Items.Contains(searchParams.Filters))
-                    cbFilters.Items.Add(searchParams.Filters);
+                if (!cbFiltersInclusion.Items.Contains(searchParams.FiltersInclusions))
+                    cbFiltersInclusion.Items.Add(searchParams.FiltersInclusions);
+                if (!cbFiltersExclusion.Items.Contains(searchParams.FiltersExclusions))
+                    cbFiltersExclusion.Items.Add(searchParams.FiltersExclusions);
                 if (!cbKeywords.Items.Contains(searchParams.Keywords))
                     cbKeywords.Items.Add(searchParams.Keywords);
 
@@ -505,11 +556,20 @@
                 }
             }
 
-            for (int idx = 0; idx < cbFilters.Items.Count; idx++)
+            for (int idx = 0; idx < cbFiltersInclusion.Items.Count; idx++)
             {
-                if (cbFilters.Items[idx].ToString() == config.Filters)
+                if (cbFiltersInclusion.Items[idx].ToString() == config.FiltersInclusions)
                 {
-                    cbFilters.SelectedIndex = idx;
+                    cbFiltersInclusion.SelectedIndex = idx;
+                    break;
+                }
+            }
+
+            for (int idx = 0; idx < cbFiltersExclusion.Items.Count; idx++)
+            {
+                if (cbFiltersExclusion.Items[idx].ToString() == config.FiltersExclusions)
+                {
+                    cbFiltersExclusion.SelectedIndex = idx;
                     break;
                 }
             }
@@ -658,7 +718,7 @@
             int matchindex = 0;
             System.StringComparison compare = config.UseCaseSensitiveMatch ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
             string viewContent = viewMatches.Text;
-                    
+
             int keywordIndex = viewContent.IndexOf(matches[matchindex].Match, firstIndex, compare);
             while (-1 != keywordIndex && keywordIndex < lastIndex)
             {
@@ -847,7 +907,7 @@
             foreach (DataGridViewRow row in rows)
             {
                 // only prefix newline when needed
-                if(sb.Length != 0) 
+                if(sb.Length != 0)
                 {
                     sb.Append(Environment.NewLine);
                 }
@@ -935,7 +995,7 @@
                 LaunchFolder(Path.GetDirectoryName(fm.GetFullFileName()));
             }
         }
-        
+
         private void cbShowContext_CheckedChanged(object sender, EventArgs e)
         {
             nudContextLines.Enabled = cbShowContext.Checked;
@@ -1004,11 +1064,12 @@
         private void SetWindowFont(Font font)
         {
             cbPath.Font = font;
-            cbFilters.Font = font;
+            cbFiltersInclusion.Font = font;
             cbKeywords.Font = font;
             cbSearchHistory.Font = font;
             viewFiles.Font = font;
             viewMatches.Font = font;
         }
+
     }
 }

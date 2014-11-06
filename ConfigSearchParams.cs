@@ -14,7 +14,9 @@ namespace VCodeHunt.Config
         public SearchParams()
         {
             Path = string.Empty;
-            Filters = "*";
+            FiltersInclusions = "*";
+            FiltersExclusions = "";
+
             Keywords = string.Empty;
 
             FileType = FileContentType.Detect;
@@ -37,7 +39,8 @@ namespace VCodeHunt.Config
         }
 
         public string Path { get; set; }
-        public string Filters { get; set; }
+        public string FiltersInclusions { get; set; }
+        public string FiltersExclusions { get; set; }
         public string Keywords { get; set; }
 
         public FileContentType FileType { get; set; }
@@ -63,7 +66,8 @@ namespace VCodeHunt.Config
         {
             int hashcode = 0;
             hashcode ^= Path.GetHashCode();
-            hashcode ^= Filters.GetHashCode();
+            hashcode ^= FiltersInclusions.GetHashCode();
+            hashcode ^= FiltersExclusions.GetHashCode();
             hashcode ^= Keywords.GetHashCode();
 
             hashcode ^= UseRegexMatch.GetHashCode();
@@ -81,9 +85,9 @@ namespace VCodeHunt.Config
         {
             get
             {
-                if (Keywords.Length <= 0 || Filters.Length <= 0 || Path.Length <= 0)
+                if (Keywords.Length <= 0 || Path.Length <= 0 || (FiltersInclusions.Length <= 0 && FiltersExclusions.Length <= 0))
                     return string.Empty;
-                return string.Format("[{0}] - [{1}] [{2}] [{3}]", GetHashCode().ToString("X8"), Keywords, Filters, Path);
+                return string.Format("[{0}] - [{1}] [{2}] [{3}] [{4}]", GetHashCode().ToString("X8"), Keywords, FiltersInclusions, FiltersExclusions, Path);
             }
         }
     }
