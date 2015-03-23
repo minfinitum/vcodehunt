@@ -101,36 +101,26 @@ namespace VCodeHunt
                         }
                         else
                         {
-                            if (buff[bidx] == keywordsLowerCase[0])
+                            int kidx = 0;
+                            int sidx = bidx;
+                            for (; kidx < keywords.Length && sidx < bytesMax; kidx++, sidx++)
                             {
-                                matchkeywords[0] = keywordsLowerCase[0];
-                                found = true;
-                            }
-                            else if (buff[bidx] == keywordsUpperCase[0])
-                            {
-                                matchkeywords[0] = keywordsUpperCase[0];
-                                found = true;
-                            }
-
-                            if (found)
-                            {
-                                for (int kidx = 1, sidx = bidx + 1; kidx < keywords.Length && sidx < bytesMax; kidx++, sidx++)
+                                if (buff[sidx] == keywordsLowerCase[kidx])
                                 {
-                                    if (buff[sidx] == keywordsLowerCase[kidx])
-                                    {
-                                        matchkeywords[kidx] = keywordsLowerCase[kidx];
-                                    }
-                                    else if (buff[sidx] == keywordsUpperCase[kidx])
-                                    {
-                                        matchkeywords[kidx] = keywordsUpperCase[kidx];
-                                    }
-                                    else
-                                    {
-                                        found = false;
-                                        break;
-                                    }
+                                    matchkeywords[kidx] = keywordsLowerCase[kidx];
+                                }
+                                else if (buff[sidx] == keywordsUpperCase[kidx])
+                                {
+                                    matchkeywords[kidx] = keywordsUpperCase[kidx];
+                                }
+                                else
+                                {
+                                    found = false;
+                                    break;
                                 }
                             }
+
+                            found = kidx == keywords.Length;
                         }
 
                         // check for match
