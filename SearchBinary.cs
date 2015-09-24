@@ -131,7 +131,7 @@ namespace VCodeHunt
 
                             match = new VCodeHunt.SearchFile.KeywordMatch();
                         }
-                        else if (searchParams.ContextLinesCount > 0)
+                        else if (searchParams.ShowContextLines && searchParams.ContextLinesCount > 0)
                         {
                             if (matches.Count > 0 && matches.Last().ContextPost.Count < searchParams.ContextLinesCount)
                             {
