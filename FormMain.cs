@@ -238,6 +238,7 @@
 
             config.ShowLineNumbers = cbSearchShowLineNumbers.Checked;
             config.UseSubFolders = cbSearchSubFolders.Checked;
+            config.UseTextContentOnly = cbSearchTextFiles.Checked;
 
             config.ShowContextLines = cbShowContext.Checked;
             config.ContextLinesCount = (int)nudContextLines.Value;
@@ -247,6 +248,8 @@
 
             config.UseMaxFileSize = cbMaxFileSize.Checked;
             config.MaxFileSize = (int)nudMaxFileSize.Value;
+
+            config.VerboseEvents = cbVerboseEvents.Checked;
 
             return config;
         }
@@ -355,12 +358,18 @@
                         FileInfo finfo = new FileInfo(file);
                         if ((context.UseMinFileSize && finfo.Length < context.MinFileSize))
                         {
-                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (min size): " + file);
+                            if (context.VerboseEvents)
+                            {
+                                UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (min size): " + file);
+                            }
                             continue;
                         }
                         else if ((context.UseMaxFileSize && finfo.Length > context.MaxFileSize))
                         {
-                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (max size): " + file);
+                            if (context.VerboseEvents)
+                            {
+                                UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (max size): " + file);
+                            }
                             continue;
                         }
                     }
@@ -391,6 +400,11 @@
                                 Debug.WriteLine("[{0}][{1}]", ex.Source, ex.Message);
                             }
                         }
+
+                        if (context.VerboseEvents && isExcluded)
+                        {
+                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (IS EXCLUDED): " + file);
+                        }
                     }
 
                     bool isIncluded = false;
@@ -416,9 +430,24 @@
                                 Debug.WriteLine("[{0}][{1}]", ex.Source, ex.Message);
                             }
                         }
+
+                        if(context.VerboseEvents && !isIncluded)
+                        {
+                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (NOT INCLUDED): " + file);
+                        }
                     }
 
-                    if(!isExcluded && isIncluded)
+                    bool isContentExcluded = false;
+                    if (!isExcluded && isIncluded)
+                    {
+                        isContentExcluded = context.UseTextContentOnly && SearchFile.DetectFileType(file) == FileContentType.Binary;
+                        if (context.VerboseEvents && isContentExcluded)
+                        {
+                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (NOT TEXT): " + file);
+                        }
+                    }
+
+                    if (!isExcluded && !isContentExcluded && isIncluded)
                     {
                         try
                         {
@@ -597,6 +626,7 @@
             cbSearchUseRegex.Checked = config.UseRegexMatch;
             cbSearchNegate.Checked = config.UseNegateSearch;
             cbSearchSubFolders.Checked = config.UseSubFolders;
+            cbSearchTextFiles.Checked = config.UseTextContentOnly;
             cbSearchShowLineNumbers.Checked = config.ShowLineNumbers;
 
             cbShowContext.Checked = config.ShowContextLines;
@@ -609,6 +639,8 @@
             nudMaxFileSize.Value = config.MaxFileSize;
 
             cbSearchHistory.Text = config.DisplayID;
+
+            cbVerboseEvents.Checked = config.VerboseEvents;
         }
 
         private void UpdateStatus(UpdateStatusType type, string msg)
@@ -662,15 +694,15 @@
         private void HighlightKeyWords(SearchParams config, SearchFile.KeywordMatch match, string fileName)
         {
             string text = match.ToString(config);
+            int lines = (text.Count(p => p.CompareTo('\n') == 0));
+            m_matchToLineTable[fileName].AddRange(Enumerable.Repeat(match.Index, lines));
+
             if (config.UseNegateSearch)
             {
                 viewMatches.SelectedText = text;
             }
             else
             {
-                int lines = (text.Count(p => p.CompareTo('\n') == 0));
-                m_matchToLineTable[fileName].AddRange(Enumerable.Repeat(match.Index, lines));
-
                 int textIndex = 0;
                 int matchIndex = text.IndexOf(match.Match, 0);
                 do
@@ -839,7 +871,8 @@
                 return;
             }
 
-            int lineindex = viewMatches.GetLineFromCharIndex(charindex);
+            // support if we have a multiline output ensuring the selected line contains the line number prefix
+            int lineindex = Math.Min(viewMatches.GetLineFromCharIndex(charindex), viewMatches.Lines.Count() - 1);
             if (lineindex == -1)
             {
                 return;
@@ -851,6 +884,12 @@
                 FileMatch fm = row.DataBoundItem as FileMatch;
 
                 string fileName = fm.GetFullFileName();
+                var table = m_matchToLineTable[fileName];
+
+                if(lineindex >= table.Count)
+                {
+                    lineindex = table.Count - 1;
+                }
                 LaunchViewer(fileName, m_matchToLineTable[fileName][lineindex]);
             }
         }

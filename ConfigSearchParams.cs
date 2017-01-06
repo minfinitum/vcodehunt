@@ -25,6 +25,7 @@ namespace VCodeHunt.Config
             UseNegateSearch = false;
             UseWholeWordMatch = false;
             UseSubFolders = true;
+            UseTextContentOnly = true;
 
             ShowContextLines = true;
             ContextLinesCount = 5;
@@ -36,6 +37,8 @@ namespace VCodeHunt.Config
 
             UseMaxFileSize = false;
             MaxFileSize = 0;
+
+            VerboseEvents = false;
         }
 
         public string Path { get; set; }
@@ -50,6 +53,7 @@ namespace VCodeHunt.Config
         public bool UseNegateSearch { get; set; }
         public bool UseWholeWordMatch { get; set; }
         public bool UseSubFolders { get; set; }
+        public bool UseTextContentOnly { get; set; }
 
         public bool ShowContextLines { get; set; }
         public int ContextLinesCount { get; set; }
@@ -61,6 +65,7 @@ namespace VCodeHunt.Config
 
         public bool UseMaxFileSize { get; set; }
         public int MaxFileSize { get; set; }
+        public bool VerboseEvents { get; set; }
 
         public override int GetHashCode()
         {
@@ -75,6 +80,7 @@ namespace VCodeHunt.Config
             hashcode ^= UseNegateSearch.GetHashCode();
             hashcode ^= UseWholeWordMatch.GetHashCode();
             hashcode ^= UseSubFolders.GetHashCode();
+            hashcode ^= UseTextContentOnly.GetHashCode();
             hashcode ^= ContextLinesCount.GetHashCode();
             hashcode ^= ShowLineNumbers.GetHashCode();
 
@@ -86,7 +92,10 @@ namespace VCodeHunt.Config
             get
             {
                 if (Keywords.Length <= 0 || Path.Length <= 0 || (FiltersInclusions.Length <= 0 && FiltersExclusions.Length <= 0))
+                {
                     return string.Empty;
+                }
+
                 return string.Format("[{0}] - [{1}] [{2}] [{3}] [{4}]", GetHashCode().ToString("X8"), Keywords, FiltersInclusions, FiltersExclusions, Path);
             }
         }

@@ -182,23 +182,40 @@
 
         };
 
-        public List<KeywordMatch> DetectSearch(SearchParams context, string file)
+        public static FileContentType DetectFileType(string file)
         {
-            List<KeywordMatch> matches = new List<KeywordMatch>();
             if (SearchBinary.IsMine(file))
             {
-                SearchBinary bin = new SearchBinary(m_terminate);
-                matches = bin.Search(context, file);
+                return FileContentType.Binary;
             }
             else if (SearchText.IsMine(file))
             {
-                SearchText text = new SearchText(m_terminate);
-                matches = text.Search(context, file);
+                return FileContentType.Text;
             }
-            else
+
+            return FileContentType.None;
+        }
+
+        public List<KeywordMatch> DetectSearch(SearchParams context, string file)
+        {
+            List<KeywordMatch> matches = new List<KeywordMatch>();
+            var contentType = DetectFileType(file);
+            switch (contentType)
             {
-                SearchText text = new SearchText(m_terminate);
-                matches = text.Search(context, file);
+                case FileContentType.Binary:
+                    {
+                        SearchBinary bin = new SearchBinary(m_terminate);
+                        matches = bin.Search(context, file);
+                    }
+                    break;
+
+                case FileContentType.Text:
+                default:
+                    {
+                        SearchText text = new SearchText(m_terminate);
+                        matches = text.Search(context, file);
+                    }
+                    break;
             }
 
             return (matches == null || matches.Count() == 0) ? null : matches;

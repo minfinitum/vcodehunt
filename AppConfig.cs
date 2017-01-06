@@ -18,7 +18,6 @@
                 using (StreamReader reader = File.OpenText(m_file))
                 {
                     config = (T)xs.Deserialize(reader);
-                    reader.Close();
                 }
             }
             catch (Exception ex)
@@ -50,7 +49,6 @@
                 {
                     xs.Serialize(writer, config);
                     writer.Flush();
-                    writer.Close();
                 }
             }
             catch (Exception ex)

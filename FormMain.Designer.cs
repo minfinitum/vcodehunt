@@ -71,10 +71,12 @@
             this.cbSearchShowLineNumbers = new System.Windows.Forms.CheckBox();
             this.cbMinFileSize = new System.Windows.Forms.CheckBox();
             this.nudContextLines = new System.Windows.Forms.NumericUpDown();
-            this.lblFileContentType = new System.Windows.Forms.Label();
+            this.lblDisplayResultType = new System.Windows.Forms.Label();
             this.cbFileContentType = new System.Windows.Forms.ComboBox();
             this.lbFiltersExclusion = new System.Windows.Forms.Label();
             this.cbFiltersExclusion = new System.Windows.Forms.ComboBox();
+            this.cbSearchTextFiles = new System.Windows.Forms.CheckBox();
+            this.cbVerboseEvents = new System.Windows.Forms.CheckBox();
             this.statusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitter)).BeginInit();
             this.splitter.Panel1.SuspendLayout();
@@ -109,7 +111,7 @@
             this.splitter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitter.Location = new System.Drawing.Point(290, 81);
+            this.splitter.Location = new System.Drawing.Point(290, 69);
             this.splitter.Name = "splitter";
             this.splitter.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -377,7 +379,7 @@
             // nudMaxFileSize
             // 
             this.nudMaxFileSize.Enabled = false;
-            this.nudMaxFileSize.Location = new System.Drawing.Point(146, 469);
+            this.nudMaxFileSize.Location = new System.Drawing.Point(146, 492);
             this.nudMaxFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -390,7 +392,7 @@
             // nudMinFileSize
             // 
             this.nudMinFileSize.Enabled = false;
-            this.nudMinFileSize.Location = new System.Drawing.Point(146, 446);
+            this.nudMinFileSize.Location = new System.Drawing.Point(146, 469);
             this.nudMinFileSize.Maximum = new decimal(new int[] {
             0,
             256,
@@ -403,7 +405,7 @@
             // cbMaxFileSize
             // 
             this.cbMaxFileSize.AutoSize = true;
-            this.cbMaxFileSize.Location = new System.Drawing.Point(14, 470);
+            this.cbMaxFileSize.Location = new System.Drawing.Point(14, 493);
             this.cbMaxFileSize.Name = "cbMaxFileSize";
             this.cbMaxFileSize.Size = new System.Drawing.Size(122, 17);
             this.cbMaxFileSize.TabIndex = 21;
@@ -414,7 +416,7 @@
             // cbShowContext
             // 
             this.cbShowContext.AutoSize = true;
-            this.cbShowContext.Location = new System.Drawing.Point(14, 383);
+            this.cbShowContext.Location = new System.Drawing.Point(14, 385);
             this.cbShowContext.Name = "cbShowContext";
             this.cbShowContext.Size = new System.Drawing.Size(92, 17);
             this.cbShowContext.TabIndex = 16;
@@ -465,7 +467,7 @@
             // cbSearchSubFolders
             // 
             this.cbSearchSubFolders.AutoSize = true;
-            this.cbSearchSubFolders.Location = new System.Drawing.Point(14, 424);
+            this.cbSearchSubFolders.Location = new System.Drawing.Point(14, 447);
             this.cbSearchSubFolders.Name = "cbSearchSubFolders";
             this.cbSearchSubFolders.Size = new System.Drawing.Size(113, 17);
             this.cbSearchSubFolders.TabIndex = 18;
@@ -475,7 +477,7 @@
             // cbSearchShowLineNumbers
             // 
             this.cbSearchShowLineNumbers.AutoSize = true;
-            this.cbSearchShowLineNumbers.Location = new System.Drawing.Point(14, 360);
+            this.cbSearchShowLineNumbers.Location = new System.Drawing.Point(14, 362);
             this.cbSearchShowLineNumbers.Name = "cbSearchShowLineNumbers";
             this.cbSearchShowLineNumbers.Size = new System.Drawing.Size(121, 17);
             this.cbSearchShowLineNumbers.TabIndex = 15;
@@ -485,7 +487,7 @@
             // cbMinFileSize
             // 
             this.cbMinFileSize.AutoSize = true;
-            this.cbMinFileSize.Location = new System.Drawing.Point(14, 447);
+            this.cbMinFileSize.Location = new System.Drawing.Point(14, 470);
             this.cbMinFileSize.Name = "cbMinFileSize";
             this.cbMinFileSize.Size = new System.Drawing.Size(100, 17);
             this.cbMinFileSize.TabIndex = 19;
@@ -496,19 +498,19 @@
             // nudContextLines
             // 
             this.nudContextLines.Enabled = false;
-            this.nudContextLines.Location = new System.Drawing.Point(145, 382);
+            this.nudContextLines.Location = new System.Drawing.Point(145, 384);
             this.nudContextLines.Name = "nudContextLines";
             this.nudContextLines.Size = new System.Drawing.Size(137, 20);
             this.nudContextLines.TabIndex = 17;
             // 
-            // lblFileContentType
+            // lblDisplayResultType
             // 
-            this.lblFileContentType.AutoSize = true;
-            this.lblFileContentType.Location = new System.Drawing.Point(14, 257);
-            this.lblFileContentType.Name = "lblFileContentType";
-            this.lblFileContentType.Size = new System.Drawing.Size(63, 13);
-            this.lblFileContentType.TabIndex = 9;
-            this.lblFileContentType.Text = "File Content";
+            this.lblDisplayResultType.AutoSize = true;
+            this.lblDisplayResultType.Location = new System.Drawing.Point(12, 257);
+            this.lblDisplayResultType.Name = "lblDisplayResultType";
+            this.lblDisplayResultType.Size = new System.Drawing.Size(101, 13);
+            this.lblDisplayResultType.TabIndex = 9;
+            this.lblDisplayResultType.Text = "Display Result Type";
             // 
             // cbFileContentType
             // 
@@ -539,11 +541,33 @@
             this.cbFiltersExclusion.Size = new System.Drawing.Size(268, 21);
             this.cbFiltersExclusion.TabIndex = 28;
             // 
+            // cbSearchTextFiles
+            // 
+            this.cbSearchTextFiles.AutoSize = true;
+            this.cbSearchTextFiles.Location = new System.Drawing.Point(14, 424);
+            this.cbSearchTextFiles.Name = "cbSearchTextFiles";
+            this.cbSearchTextFiles.Size = new System.Drawing.Size(132, 17);
+            this.cbSearchTextFiles.TabIndex = 29;
+            this.cbSearchTextFiles.Text = "Search Text Files Only";
+            this.cbSearchTextFiles.UseVisualStyleBackColor = true;
+            // 
+            // cbVerboseEvents
+            // 
+            this.cbVerboseEvents.AutoSize = true;
+            this.cbVerboseEvents.Location = new System.Drawing.Point(14, 518);
+            this.cbVerboseEvents.Name = "cbVerboseEvents";
+            this.cbVerboseEvents.Size = new System.Drawing.Size(101, 17);
+            this.cbVerboseEvents.TabIndex = 30;
+            this.cbVerboseEvents.Text = "Verbose Events";
+            this.cbVerboseEvents.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 601);
+            this.Controls.Add(this.cbVerboseEvents);
+            this.Controls.Add(this.cbSearchTextFiles);
             this.Controls.Add(this.lbFiltersExclusion);
             this.Controls.Add(this.cbFiltersExclusion);
             this.Controls.Add(this.nudMaxFileSize);
@@ -558,7 +582,7 @@
             this.Controls.Add(this.cbSearchShowLineNumbers);
             this.Controls.Add(this.cbMinFileSize);
             this.Controls.Add(this.nudContextLines);
-            this.Controls.Add(this.lblFileContentType);
+            this.Controls.Add(this.lblDisplayResultType);
             this.Controls.Add(this.cbFileContentType);
             this.Controls.Add(this.btnAction);
             this.Controls.Add(this.btnBrowse);
@@ -646,11 +670,13 @@
         private System.Windows.Forms.CheckBox cbSearchShowLineNumbers;
         private System.Windows.Forms.CheckBox cbMinFileSize;
         private System.Windows.Forms.NumericUpDown nudContextLines;
-        private System.Windows.Forms.Label lblFileContentType;
+        private System.Windows.Forms.Label lblDisplayResultType;
         private System.Windows.Forms.ComboBox cbFileContentType;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
         private System.Windows.Forms.Label lbFiltersExclusion;
         private System.Windows.Forms.ComboBox cbFiltersExclusion;
+        private System.Windows.Forms.CheckBox cbSearchTextFiles;
+        private System.Windows.Forms.CheckBox cbVerboseEvents;
     }
 }
 
