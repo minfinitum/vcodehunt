@@ -210,6 +210,7 @@
                     cbKeywords.Focus();
                     e.Handled = true;
                     break;
+
                 case Keys.Enter:
                     // prevent double 'click'
                     if (!this.btnAction.Focused)
@@ -1110,5 +1111,14 @@
             viewMatches.Font = font;
         }
 
+        private void cbPath_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Oem5)
+            {
+                //viewMatches.Text += $"Down KeyValue: [{e.KeyValue}] KeyCode: [{e.KeyCode}] SelLen:[{cbPath.SelectionLength}] SelStar:[{cbPath.SelectionStart}]" + Environment.NewLine;
+                cbPath.SelectionStart = cbPath.SelectionStart + cbPath.SelectionLength + 1;
+                e.Handled = true;
+            }
+        }
     }
 }

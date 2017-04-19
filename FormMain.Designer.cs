@@ -315,6 +315,7 @@
             this.cbPath.Name = "cbPath";
             this.cbPath.Size = new System.Drawing.Size(921, 21);
             this.cbPath.TabIndex = 2;
+            this.cbPath.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbPath_KeyDown);
             // 
             // btnAction
             // 
