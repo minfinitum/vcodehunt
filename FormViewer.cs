@@ -22,7 +22,8 @@
                 new App("notepad++.exe", "\"%1\" -n%2"),
                 new App("ultraedit.exe", "\"%1\"/%2"),
                 new App("sublime_text.exe", "\"%1\":%2"),
-                new App("devenv.exe", "/Edit \"%1\" /Command \"Edit.GoTo %2\"")
+                new App("devenv.exe", "/Edit \"%1\" /Command \"Edit.GoTo %2\""),
+                new App("code.exe", "-g \"%1\":%2")
             };
 
         ToolTip _tt = new ToolTip();
@@ -161,7 +162,7 @@
                 // autodetect applications
                 foreach (App app in apps)
                 {
-                    if (tbAppPath.Text.EndsWith(app.Name))
+                    if (tbAppPath.Text.EndsWith(app.Name, StringComparison.OrdinalIgnoreCase))
                     { 
                         tbAppArgs.Text = app.Args;
                     }
