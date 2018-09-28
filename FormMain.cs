@@ -860,14 +860,15 @@
 
             if (null != viewer)
             {
-                string fileName = string.Format("\"{0}\"", viewer.AppPath);
+                string app = viewer.AppPath;
+                string fileName = string.Format("\"{0}\"", app);
                 string args = viewer.AppArgs;
                 args = args.Replace("%1", viewFile);
                 args = args.Replace("%2", lineNumber.ToString());
 
-                if (!File.Exists(fileName))
+                if (!File.Exists(app))
                 {
-                    UpdateStatus(UpdateStatusType.STATUS_BAR, $"Viewer not found: {fileName}");
+                    UpdateStatus(UpdateStatusType.STATUS_BAR, $"Viewer not found: {app}");
                 }
                 else
                 {
