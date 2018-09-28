@@ -209,3 +209,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+*.lock
+.vs/VCodeHunt/v15/Server/sqlite3/storage.ide
+.vs/VCodeHunt/v15/Server/sqlite3/storage.ide-shm
+.vs/VCodeHunt/v15/Server/sqlite3/storage.ide-wal
