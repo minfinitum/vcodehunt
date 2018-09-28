@@ -354,29 +354,8 @@
                         break;
                     }
 
-                    try
-                    {
-                        FileInfo finfo = new FileInfo(file);
-                        if ((context.UseMinFileSize && finfo.Length < context.MinFileSize))
-                        {
-                            if (context.VerboseEvents)
-                            {
-                                UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (min size): " + file);
-                            }
-                            continue;
-                        }
-                        else if ((context.UseMaxFileSize && finfo.Length > context.MaxFileSize))
-                        {
-                            if (context.VerboseEvents)
-                            {
-                                UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (max size): " + file);
-                            }
-                            continue;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
+                    if (filecount % (long)1000 == 0)
+                        UpdateStatus(UpdateStatusType.STATUS_BAR, $"Scanning files: {filecount}");
 
                     bool isExcluded = false;
                     if (filtersExclusion != null && filtersExclusion.Count() > 0)
@@ -438,8 +417,36 @@
                         }
                     }
 
-                    bool isContentExcluded = false;
+                    bool isFileSizeExcluded = false;
                     if (!isExcluded && isIncluded)
+                    {
+                        try
+                        {
+                            FileInfo finfo = new FileInfo(file);
+                            if ((context.UseMinFileSize && finfo.Length < context.MinFileSize))
+                            {
+                                if (context.VerboseEvents)
+                                {
+                                    UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (min size): " + file);
+                                }
+                                isFileSizeExcluded = true;
+                            }
+                            else if ((context.UseMaxFileSize && finfo.Length > context.MaxFileSize))
+                            {
+                                if (context.VerboseEvents)
+                                {
+                                    UpdateStatus(UpdateStatusType.STATUS_BAR, "Skip File (max size): " + file);
+                                }
+                                isFileSizeExcluded = true;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+
+                    bool isContentExcluded = false;
+                    if (!isExcluded && !isFileSizeExcluded && isIncluded)
                     {
                         isContentExcluded = context.UseTextContentOnly && SearchFile.DetectFileType(file) == FileContentType.Binary;
                         if (context.VerboseEvents && isContentExcluded)
@@ -448,11 +455,11 @@
                         }
                     }
 
-                    if (!isExcluded && !isContentExcluded && isIncluded)
+                    if (!isExcluded && !isFileSizeExcluded && !isContentExcluded && isIncluded)
                     {
                         try
                         {
-                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Scanning file: " + file);
+                            UpdateStatus(UpdateStatusType.STATUS_BAR, "Scanning: " + file);
 
                             List<SearchFile.KeywordMatch> matches = m_filesearch.Search(context, file);
                             if (matches != null)
@@ -858,7 +865,14 @@
                 args = args.Replace("%1", viewFile);
                 args = args.Replace("%2", lineNumber.ToString());
 
-                Process.Start(fileName, args);
+                if (!File.Exists(fileName))
+                {
+                    UpdateStatus(UpdateStatusType.STATUS_BAR, $"Viewer not found: {fileName}");
+                }
+                else
+                {
+                    Process.Start(fileName, args);
+                }
             }
         }
 
